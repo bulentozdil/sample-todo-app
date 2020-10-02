@@ -57,7 +57,7 @@ To do deploying, open your terminal and
 docker-compose build --no-cache
 
 # Run services defined on docker-compose.yml file
-docker compose up -d
+docker-compose up -d
 
 # Stop services
 docker-compose stop
