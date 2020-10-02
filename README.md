@@ -5,7 +5,7 @@ For more details about couchbase db you can visit clicking [this link](https://w
 
 # Prerequisities
 
-Minimum requirements to clone ,build ,test and run this application, you'll need these installed on your local computer.
+Minimum requirements to clone ,build ,test and run this application, you'll need these installed on your computer.
 These are like following
 
 * [Git](http://www.git-scm.com) - _More details_
@@ -23,6 +23,7 @@ git clone https://github.com/bulentozdil/sample-todo-app.git
 # Go into the repository
 cd sample-todo-app
 ```
+Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/)
 
 # How To Test
 ```git
@@ -48,7 +49,7 @@ java - jar todoapp-1.0.0.0.jar
 
 # Deploy
 
-You can deploy this application from your local computer to local docker instance.
+You can deploy this application from your computer to docker instance.
 
 To do deploying, open your terminal and
 ```git
