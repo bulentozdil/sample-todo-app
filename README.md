@@ -1,6 +1,6 @@
 # Getting Started
 
-This is an example of to-do list application. This application consists of two part , first one is the api service written in java and the other part is database that using a couchbase db.
+This is an example of to-do list application. This application consists of two part , first one is the api service written in java and the other part is couchbase database that It delivers unmatched versatility, performance, scalability, and financial value across cloud, on-premises, and hybrid deployments.
 For more details about couchbase db you can visit clicking [this link](https://www.couchbase.com/)
 
 # Prerequisities
