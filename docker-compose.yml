@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  couchbasedb:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    network_mode: bridge
+    ports:
+      - 8091:8091
+      - 8094:8094
+      - 11210:11210
+    restart: always
+  todoapp:
+    build:
+      context: ./todoapp
+      dockerfile: Dockerfile
+      args:
+        env: test
+    network_mode: bridge
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - couchbasedb
