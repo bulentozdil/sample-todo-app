@@ -68,7 +68,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 			String id,
 			String userId) {
 		try {
-			return couchbaseTemplate.findByQuery(Task.class).matching(new Query().addCriteria(QueryCriteria.where("userId").eq(userId).and(QueryCriteria.where("id").eq(id)))).firstValue();
+			return couchbaseTemplate.findByQuery(Task.class).matching(new Query().addCriteria(QueryCriteria.where("userId").eq(userId).and(QueryCriteria.where("META(id)")).eq(id))).firstValue();
 		} catch (Exception e) {
 			if (e.getCause() instanceof DocumentNotFoundException) {
 				return null;

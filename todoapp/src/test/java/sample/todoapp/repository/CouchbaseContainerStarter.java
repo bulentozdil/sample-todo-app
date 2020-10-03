@@ -6,11 +6,15 @@ import java.util.stream.Collectors;
 import org.springframework.data.couchbase.core.convert.MappingCouchbaseConverter;
 import org.testcontainers.couchbase.BucketDefinition;
 import org.testcontainers.couchbase.CouchbaseContainer;
-
-import com.couchbase.client.core.cnc.tracing.ThresholdRequestTracer;
+ 
 import com.couchbase.client.core.diagnostics.ClusterState;
 import com.couchbase.client.core.env.IoConfig;
+import com.couchbase.client.core.env.IoEnvironment;
+import com.couchbase.client.core.env.LoggerConfig;
+import com.couchbase.client.core.env.OrphanReporterConfig;
 import com.couchbase.client.core.env.TimeoutConfig;
+import com.couchbase.client.core.retry.BestEffortRetryStrategy;
+import com.couchbase.client.core.service.ServiceType;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.ClusterOptions;
 import com.couchbase.client.java.diagnostics.WaitUntilReadyOptions;
@@ -46,21 +50,26 @@ public class CouchbaseContainerStarter {
 		container.start();
 
 		var environment = ClusterEnvironment.builder()
-					.timeoutConfig(
-							TimeoutConfig
-								.kvTimeout(Duration.ofSeconds(90))
-								.queryTimeout(Duration.ofSeconds(90))
-								.connectTimeout(Duration.ofSeconds(90)))
-					.ioConfig(
-							IoConfig
-								.maxHttpConnections(11)
-								.numKvConnections(11))
-					.requestTracer(
-							ThresholdRequestTracer
-								.builder(null)
-								.queryThreshold(Duration.ofSeconds(30))
-								.build()
-							).maxNumRequestsInRetry(100)
+				.timeoutConfig(TimeoutConfig
+		                .kvTimeout(Duration.ofMillis(300000))
+		                .kvDurableTimeout(Duration.ofMillis(300000))
+		                .queryTimeout(Duration.ofMillis(300000))
+		            )
+		            .ioConfig(IoConfig
+		                .captureTraffic(ServiceType.KV)
+		                .captureTraffic(ServiceType.QUERY)
+		                .numKvConnections(2)
+		            )
+		            .loggerConfig(LoggerConfig
+		                .enableDiagnosticContext(true)
+		            )
+		            .ioEnvironment(IoEnvironment
+		                .eventLoopThreadCount(4)
+		            )
+		            .orphanReporterConfig(OrphanReporterConfig
+		                .sampleSize(Integer.MAX_VALUE)
+		            )
+		            .retryStrategy(BestEffortRetryStrategy.INSTANCE)
 					.build();
 		
 		this.host = container.getConnectionString();
