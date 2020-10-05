@@ -47,7 +47,7 @@ mvn clean install -DskipTests=true
 java - jar todoapp-1.0.0.0.jar
 ```
 
-# Deploy
+# Docker compose
 
 You can deploy this application from your computer to docker instance.
 
