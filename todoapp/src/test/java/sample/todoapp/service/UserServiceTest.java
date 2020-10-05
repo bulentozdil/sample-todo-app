@@ -10,9 +10,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner; 
 
 import sample.todoapp.converter.UserConverter;
-import sample.todoapp.domain.model.user.User;
-import sample.todoapp.domain.model.user.UserRepository;
-import sample.todoapp.dto.CreateNewUserDTO; 
+import sample.todoapp.domain.model.user.User; 
+import sample.todoapp.dto.CreateNewUserDTO;
+import sample.todoapp.repository.UserRepository; 
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {

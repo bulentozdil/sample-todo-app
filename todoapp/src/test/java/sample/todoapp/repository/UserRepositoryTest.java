@@ -14,8 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import sample.todoapp.config.Constants;
 import sample.todoapp.config.CouchbaseConfig;
-import sample.todoapp.domain.model.user.User;
-import sample.todoapp.domain.model.user.UserRepository; 
+import sample.todoapp.domain.model.user.User; 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest 
@@ -39,7 +38,7 @@ public class UserRepositoryTest {
 		
 		userRepository.save(user);
 		
-		var createdUser = userRepository.findById(user.getEmail());
+		var createdUser = userRepository.findById(user.getId());
 		
 		assertNotNull(createdUser);
 	}

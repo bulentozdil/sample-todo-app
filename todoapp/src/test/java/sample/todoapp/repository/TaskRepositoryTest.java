@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import sample.todoapp.config.Constants;
 import sample.todoapp.config.CouchbaseConfig;
 import sample.todoapp.domain.model.task.Task;
-import sample.todoapp.domain.model.task.TaskRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -31,20 +30,26 @@ public class TaskRepositoryTest {
 	public static void after() {
 		starter.stop();
 	}
-	
+
 	@Test
-	public void it_should_be_find_one_id_and_userid() {
-		
+	public void it_should_save() {
+
 		Task task = new Task("1", "new task", "description");
 		taskRepository.save(task);
-		
-		var createdTask = taskRepository.findOneByIdAndUserId(task.getId(), task.getUserId());
-		
-		assertNotNull(createdTask);
 	}
 
 	@Test
-	public void it_should_be_find_all_by_userid() {
+	public void it_should_update() {
+
+		Task task = new Task("1", "new task", "description");
+		taskRepository.save(task);
+
+		task.applyChanges("new task 2", "description 2");
+		taskRepository.update(task);
+	}
+
+	@Test
+	public void it_should_get_all_by_userid() {
 
 		var allTasks = taskRepository.findAllByUserId("1");
 
@@ -53,7 +58,7 @@ public class TaskRepositoryTest {
 	}
 
 	@Test
-	public void it_should_be_get_by_id() {
+	public void it_should_get_by_id() {
 
 		Task task = new Task("1", "new task", "description");
 		taskRepository.save(task);
@@ -64,20 +69,14 @@ public class TaskRepositoryTest {
 	}
 
 	@Test
-	public void it_should_be_update() {
+	public void it_should_get_one_by_id_and_userid() {
 
 		Task task = new Task("1", "new task", "description");
 		taskRepository.save(task);
 
-		task.applyChanges("new task 2", "description 2");
-		taskRepository.update(task);
-	}
+		var createdTask = taskRepository.findOneByIdAndUserId(task.getId(), task.getUserId());
 
-	@Test
-	public void it_should_be_save() {
-
-		Task task = new Task("1", "new task", "description");
-		taskRepository.save(task);
+		assertNotNull(createdTask);
 	}
 
 	@TestConfiguration

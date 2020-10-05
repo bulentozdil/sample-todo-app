@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sample.todoapp.converter.UserConverter;
-import sample.todoapp.domain.model.user.User;
-import sample.todoapp.domain.model.user.UserRepository; 
+import sample.todoapp.domain.model.user.User; 
 import sample.todoapp.dto.CreateNewUserDTO;
+import sample.todoapp.repository.UserRepository;
 
 @Service
 public class UserService {

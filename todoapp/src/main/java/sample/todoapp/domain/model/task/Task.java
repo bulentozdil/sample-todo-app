@@ -2,11 +2,12 @@ package sample.todoapp.domain.model.task;
 
 import java.util.Date;
 import java.util.UUID;
-
+ 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.index.QueryIndexed;
 import org.springframework.data.couchbase.core.mapping.Document;
-import org.springframework.data.couchbase.core.mapping.Field; 
+import org.springframework.data.couchbase.core.mapping.Field;
+
 @Document
 public class Task {
 
@@ -19,13 +20,16 @@ public class Task {
 	private String name;
 	@Field
 	private String description;
-	@Field
+	@Field 
 	private boolean isCompleted;
-	@Field
+	@Field 
 	private boolean isDeleted;
 	@Field
 	private long timespan;
 	
+	/**
+	 * 
+	 */
 	public Task() {
 	
 	}
@@ -116,14 +120,14 @@ public class Task {
 	/**
 	 * @return the isCompleted
 	 */
-	public boolean isCompleted() {
+	public boolean getIsCompleted() {
 		return isCompleted;
 	}
 
 	/**
 	 * @return the isDeleted
 	 */
-	public boolean isDeleted() {
+	public boolean getIsDeleted() {
 		return isDeleted;
 	}
 	

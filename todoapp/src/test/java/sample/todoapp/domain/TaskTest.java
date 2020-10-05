@@ -28,7 +28,7 @@ public class TaskTest {
 		Task task = new Task("1", "new task", "description");
 		task.setAsCompleted();
 		
-		assertEquals(true, task.isCompleted());
+		assertEquals(true, task.getIsCompleted());
 	}
 	
 	@Test
@@ -37,6 +37,6 @@ public class TaskTest {
 		Task task = new Task("1", "new task", "description");
 		task.setAsDeleted();
 		
-		assertEquals(true, task.isDeleted());
+		assertEquals(true, task.getIsDeleted());
 	}
 }

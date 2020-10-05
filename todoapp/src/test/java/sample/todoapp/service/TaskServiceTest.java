@@ -1,5 +1,5 @@
 package sample.todoapp.service;
-
+  
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,10 +14,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import sample.todoapp.converter.TaskConverter;
-import sample.todoapp.domain.model.task.Task;
-import sample.todoapp.domain.model.task.TaskRepository;
+import sample.todoapp.domain.model.task.Task; 
 import sample.todoapp.dto.CreateTaskDTO;
 import sample.todoapp.exception.GlobalException;
+import sample.todoapp.repository.TaskRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TaskServiceTest {
@@ -32,7 +32,7 @@ public class TaskServiceTest {
 	private TaskConverter taskConverter;
 	
 	@Test
-	public void it_should_be_get_one() {
+	public void it_should_get_one() {
 		
 		// given
 		String taskId="123xyz";
@@ -51,7 +51,7 @@ public class TaskServiceTest {
 	}
 	
 	@Test
-	public void it_should_be_get_all_by_id() {
+	public void it_should_get_all_by_id() {
 		
 		// given 
 		String userId="1";
@@ -71,7 +71,7 @@ public class TaskServiceTest {
 	}
 	
 	@Test
-	public void it_should_be_create_new_task() {
+	public void it_should_create_new_task() {
 
 		// given
 		var dto = new CreateTaskDTO("ozdilbulent@gmail.com", "new task", "Hello my first task");
@@ -102,7 +102,7 @@ public class TaskServiceTest {
 	}
 
 	@Test
-	public void it_should_be_edit_task() {
+	public void it_should_edit_task() {
 
 		// given
 		String taskId="123xyz";
@@ -120,21 +120,8 @@ public class TaskServiceTest {
 		Mockito.verify(taskRepository).save(task);
 	}
 	
-	@Test(expected= GlobalException.class)
-	public void it_should_be_set_as_completed_throw_error() {
-		
-		// given
-		String taskId="123xyz";
-		Task task = null;
-		
-		Mockito.when(taskRepository.findById(taskId)).thenReturn(task); 
-		
-		//when
-		taskService.setTaskAsCompleted(taskId);
-	}
-	
 	@Test
-	public void it_should_be_set_as_completed() {
+	public void it_should_update_iscompleted_field_as_true() {
 		
 		// given
 		var task = new Task("ozdilbulent@gmail.com", "new task", "Hello my first task");
@@ -146,25 +133,12 @@ public class TaskServiceTest {
 		boolean retval = taskService.setTaskAsCompleted(task.getId());
 		
 		// then
-		assertTrue(retval);
+		assertEquals(true, retval);
 		Mockito.verify(taskRepository).update(task);
 	}
 	
-	@Test(expected= GlobalException.class)
-	public void it_should_be_set_as_deleted_throw_error() {
-		
-		// given
-		String taskId="123xyz";
-		Task task = null;
-				
-		Mockito.when(taskRepository.findById(taskId)).thenReturn(task); 
-				
-		//when
-		taskService.setTaskAsDeleted(taskId);
-	}
-	
 	@Test
-	public void it_should_be_set_as_deleted() {
+	public void it_should_update_isdeleted_field_as_true() {
 		
 		// given
 		var task = new Task("ozdilbulent@gmail.com", "new task", "Hello my first task");
@@ -175,7 +149,7 @@ public class TaskServiceTest {
 		//when
 		boolean retval = taskService.setTaskAsDeleted(task.getId());
 		
-		// then
+		// then 
 		assertTrue(retval);
 		Mockito.verify(taskRepository).update(task);
 	}

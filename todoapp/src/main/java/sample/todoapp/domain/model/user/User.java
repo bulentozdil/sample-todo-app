@@ -2,6 +2,7 @@ package sample.todoapp.domain.model.user;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import org.springframework.data.annotation.Id;
@@ -12,6 +13,9 @@ import org.springframework.data.couchbase.core.mapping.Field;
 public class User {
 
 	@Id
+	private String id;
+	
+	@Field
 	private String email;
 
 	@Field
@@ -19,6 +23,10 @@ public class User {
 
 	@Field
 	private String password;
+	
+	public User() {
+	
+	}
 
 	/**
 	 * @param fullname
@@ -36,6 +44,8 @@ public class User {
 		this.fullname = fullname;
 		this.email = email;
 		this.password = password;
+		
+		this.id = UUID.randomUUID().toString();
 	}
 
 	/**
@@ -49,7 +59,7 @@ public class User {
 			.filter(Predicate.not(String::isEmpty).negate().and(f -> f != null).negate())
 			.ifPresentOrElse((result) -> {},
 				() -> {
-					throw new NullPointerException(message);
+					throw new IllegalArgumentException(message);
 				});
 	}
 
@@ -58,6 +68,10 @@ public class User {
 	 */
 	public void encodePassword() {
 		this.password = java.util.Base64.getEncoder().encodeToString(password.getBytes());
+	}
+	
+	public String getId() {
+		return id;
 	}
 
 	/**

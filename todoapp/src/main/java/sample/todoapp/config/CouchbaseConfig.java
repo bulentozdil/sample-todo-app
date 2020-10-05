@@ -1,23 +1,18 @@
 package sample.todoapp.config;
 
 import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Supplier;
+import java.util.Map; 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.couchbase.CouchbaseClientFactory;
-import org.springframework.data.couchbase.SimpleCouchbaseClientFactory;
-import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
-import org.springframework.data.couchbase.core.CouchbaseTemplate;
-import org.springframework.data.couchbase.core.convert.MappingCouchbaseConverter;
-
-import com.couchbase.client.core.env.PasswordAuthenticator;
-import com.couchbase.client.java.Cluster; 
+import org.springframework.data.couchbase.CouchbaseClientFactory; 
+import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;  
+ 
+import com.couchbase.client.java.Cluster;
+import com.couchbase.client.java.ClusterOptions;
 import com.couchbase.client.java.manager.bucket.BucketManager;
 import com.couchbase.client.java.manager.bucket.BucketSettings;
 import com.couchbase.client.java.manager.bucket.BucketType;
@@ -32,9 +27,7 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 	 */
 	@Autowired
 	private CouchbaseProperty couchbaseProperty;
-
-	@Autowired
-	private MappingCouchbaseConverter mappingCouchbaseConverter;
+	
 
 	@Override
 	public String getBucketName() {
@@ -57,43 +50,8 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 	}
 
 	@Bean
-	@Qualifier(value = "taskCouchbaseTemplate")
-	public Supplier<CouchbaseTemplate> taskCouchbaseTemplate() { 
-		var setting=couchbaseProperty.getBuckets()
-				.stream()
-				.filter(f->f.getName().equals(Constants.BUCKET_TASK))
-				.findFirst()
-				.orElse(null);
-		
-		if(setting==null) {
-			return ()->null;
-		}
-		return ()-> new CouchbaseTemplate(
-				new SimpleCouchbaseClientFactory(
-						couchbaseProperty.getHost(), 
-						PasswordAuthenticator.create(couchbaseProperty.getUsername(), couchbaseProperty.getPassword()), 
-						setting.getName()), 
-				mappingCouchbaseConverter);
-	}
-
-	@Bean
-	@Qualifier(value = "userCouchbaseTemplate")
-	public Supplier<CouchbaseTemplate> userCouchbaseTemplate() {
-		var setting=couchbaseProperty.getBuckets()
-				.stream()
-				.filter(f->f.getName().equals(Constants.BUCKET_USER))
-				.findFirst()
-				.orElse(null);
-		
-		if(setting==null) {
-			return ()->null;
-		}
-		return ()-> new CouchbaseTemplate(
-				new SimpleCouchbaseClientFactory(
-						couchbaseProperty.getHost(), 
-						PasswordAuthenticator.create(couchbaseProperty.getUsername(), couchbaseProperty.getPassword()), 
-						setting.getName()), 
-				mappingCouchbaseConverter);
+	public Cluster cluster() {
+		return Cluster.connect(couchbaseProperty.getHost(), ClusterOptions.clusterOptions(couchbaseProperty.getUsername(), couchbaseProperty.getPassword()));
 	}
 
 	@Override

@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sample.todoapp.converter.TaskConverter;
-import sample.todoapp.domain.model.task.Task;
-import sample.todoapp.domain.model.task.TaskRepository; 
+import sample.todoapp.domain.model.task.Task; 
 import sample.todoapp.dto.CreateTaskDTO;
 import sample.todoapp.exception.GlobalException;
+import sample.todoapp.repository.TaskRepository;
 
 @Service
 public class TaskService {
@@ -89,7 +89,7 @@ public class TaskService {
 		}
 		task.setAsCompleted();
 		taskRepository.update(task);
-		return task.isCompleted();
+		return task.getIsCompleted();
 	}
 
 	/**
@@ -103,6 +103,6 @@ public class TaskService {
 		}
 		task.setAsDeleted();
 		taskRepository.update(task);
-		return task.isDeleted();
+		return task.getIsDeleted();
 	}
 }

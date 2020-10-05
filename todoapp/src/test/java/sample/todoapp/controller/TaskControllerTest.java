@@ -53,7 +53,7 @@ public class TaskControllerTest {
 	}
 	
 	@Test
-	public void it_should_be_as_deleted() throws Exception {
+	public void it_should_update_as_deleted() throws Exception {
 		
 		//given
 		String taskId="123xyz";
@@ -75,7 +75,7 @@ public class TaskControllerTest {
 	}
 	
 	@Test
-	public void it_should_be_as_completed() throws Exception {
+	public void it_should_update_as_completed() throws Exception {
 		
 		//given
 		String taskId="123xyz";
@@ -97,7 +97,7 @@ public class TaskControllerTest {
 	}
 	
 	@Test
-	public void it_should_be_edit_task() throws Exception {
+	public void it_should_edit_task() throws Exception {
 		
 		//given
 		String taskId="123xyz";
@@ -129,7 +129,7 @@ public class TaskControllerTest {
 	}
 	
 	@Test
-	public void it_should_be_create_new_task() throws Exception {
+	public void it_should_create_new_task() throws Exception {
 		
 		// given
 		
@@ -153,7 +153,7 @@ public class TaskControllerTest {
 	}
 	
 	@Test
-	public void it_should_be_get_all_by_userid() throws Exception {
+	public void it_should_get_all_by_userid() throws Exception {
 		
 		//given
 		var tasks = Arrays.asList(
@@ -180,7 +180,7 @@ public class TaskControllerTest {
 	}
 
 	@Test
-	public void it_should_be_get_by_id_and_userid() throws Exception {
+	public void it_should_get_by_id_and_userid() throws Exception {
 
 		// given
 		Task task = new Task("ozdilbulent@gmail.com", "new task", "Hello my first task");
