@@ -2,6 +2,7 @@ package sample.todoapp.repository;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.annotation.PostConstruct;
 
@@ -46,15 +47,21 @@ public class TaskRepositoryTest {
 
 		task.applyChanges("new task 2", "description 2");
 		taskRepository.update(task);
+		
+		assertEquals("new task 2", task.getName());
+		assertEquals("description 2", task.getDescription());
 	}
 
 	@Test
 	public void it_should_get_all_by_userid() {
+		
+		Task task = new Task("1", "new task", "description");
+		taskRepository.save(task);
 
-		var allTasks = taskRepository.findAllByUserId("1");
+		var tasks = taskRepository.findAllByUserId(task.getUserId());
 
-		assertNotNull(allTasks);
-		assertTrue(allTasks.size() > 0);
+		assertNotNull(tasks);
+		assertTrue(tasks.size() > 0);
 	}
 
 	@Test

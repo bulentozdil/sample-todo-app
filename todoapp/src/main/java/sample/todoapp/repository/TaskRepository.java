@@ -75,20 +75,14 @@ public class TaskRepository extends Repository {
 	public Task findOneByIdAndUserId(
 			String id,
 			String userId) {
-		try {
-			return cluster()
-					.query("select * from task where userId = $userId and id = $id",
-							QueryOptions.queryOptions()
-								.serializer(new CustomJsonSerializer())
-								.parameters(JsonObject.create().put("userId", userId).put("id", id)))
-					.rowsAs(Task.class).stream().findFirst().orElse(null);
-		} catch (Exception e) {
-			if (e.getCause() instanceof DocumentNotFoundException) {
-				return null;
-			} else {
-				throw new GlobalException(e.getMessage(), "TASK_REPOSITORY_ERROR");
-			}
-		}
+		return cluster().query("select * from task where userId = $userId and id = $id",
+						QueryOptions.queryOptions()
+							.serializer(new CustomJsonSerializer())
+							.parameters(JsonObject.create().put("userId", userId).put("id", id)))
+				.rowsAs(Task.class)
+					.stream()
+					.findFirst()
+					.orElse(null);
 	}
 
 	@Override
