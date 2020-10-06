@@ -75,10 +75,5 @@ public class UserControllerTest {
         // then 
         assertEquals(userDto.getFullname(),user.getFullname());
         assertEquals(userDto.getEmail(), user.getEmail());
-        
-        user.encodePassword();
-        String encodedPassword = java.util.Base64.getEncoder().encodeToString(dto.getPassword().getBytes());
-        
-        assertEquals(encodedPassword, user.getPassword());
 	}
 }
