@@ -28,11 +28,6 @@ public class User {
 	
 	}
 
-	/**
-	 * @param fullname
-	 * @param email
-	 * @param password
-	 */
 	public User(
 			String fullname,
 			String email,
@@ -48,10 +43,6 @@ public class User {
 		this.id = UUID.randomUUID().toString();
 	}
 
-	/**
-	 * @param value
-	 * @param field
-	 */
 	private void checkIfNullOrEmpty(
 			String value,
 			String message) {
@@ -63,9 +54,6 @@ public class User {
 				});
 	}
 
-	/**
-	 * @return
-	 */
 	public void encodePassword() {
 		this.password = java.util.Base64.getEncoder().encodeToString(password.getBytes());
 	}
@@ -74,23 +62,14 @@ public class User {
 		return id;
 	}
 
-	/**
-	 * @return the fullname
-	 */
 	public String getFullname() {
 		return fullname;
 	}
 
-	/**
-	 * @return the email
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @return the password
-	 */
 	public String getPassword() {
 		return password;
 	}

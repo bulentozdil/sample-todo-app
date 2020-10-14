@@ -27,6 +27,7 @@ import sample.todoapp.service.TaskService;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -53,16 +54,16 @@ public class TaskControllerTest {
 	}
 	
 	@Test
-	public void it_should_update_as_deleted() throws Exception {
+	public void it_should_delete() throws Exception {
 		
 		//given
 		String taskId="123xyz";
 		
-		given(taskService.setTaskAsDeleted(taskId)).willReturn(true);
+		given(taskService.delete(taskId)).willReturn(true);
 		
 		//when
         var result = mockMvc.perform(
-        		put("/tasks/"+taskId+"/deleted")
+        		delete("/tasks/"+taskId+"/deleted")
         			.accept(MediaType.APPLICATION_JSON) 
         			.contentType(MediaType.APPLICATION_JSON_VALUE)
         			.characterEncoding("UTF-8"))
@@ -162,9 +163,9 @@ public class TaskControllerTest {
 				new Task("ozdilbulent3@gmail.com", "new task 3", "Hello my first task 3"));
 		
 		var taskDTOs=Arrays.asList(
-				 new TaskDTO("123xyz", "ozdilbulent1@gmail.com", "new task 1", "Hello my first task 1", 12314234),
-				 new TaskDTO("123xyy", "ozdilbulent2@gmail.com", "new task 2", "Hello my first task 2", 12314234),
-				 new TaskDTO("123xxx", "ozdilbulen3@gmail.com", "new task 3", "Hello my first task 3", 12314234));
+				 new TaskDTO("123xyz", "ozdilbulent1@gmail.com", "new task 1", "Hello my first task 1", 12314234,false),
+				 new TaskDTO("123xyy", "ozdilbulent2@gmail.com", "new task 2", "Hello my first task 2", 12314234,false),
+				 new TaskDTO("123xxx", "ozdilbulen3@gmail.com", "new task 3", "Hello my first task 3", 12314234,false));
 		
 		String userId = "1";
 		
@@ -188,7 +189,7 @@ public class TaskControllerTest {
 		
 		given(taskService.getOne("123", "ozdilbulent@gmail.com")).willReturn(task);
 		
-		TaskDTO dto = new TaskDTO("123", "ozdilbulent@gmail.com", "new task", "Hello my first task", 12314234);
+		TaskDTO dto = new TaskDTO("123", "ozdilbulent@gmail.com", "new task", "Hello my first task", 12314234,false);
 		
 		given(taskConverter.apply(task)).willReturn(dto);
 		

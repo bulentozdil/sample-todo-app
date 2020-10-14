@@ -53,7 +53,7 @@ public class UserControllerTest {
 		// given
 		var dto = new CreateNewUserDTO("bülentözdil", "ozdilbulent@gmail.com", "123456");
 		var user = new User("bülentözdil", "ozdilbulent@gmail.com", "123456"); 
-		var userDto = new UserDTO("bülentözdil", "ozdilbulent@gmail.com");
+		var userDto = new UserDTO(user.getId(),"bülentözdil", "ozdilbulent@gmail.com");
 		
 		given(userService.createNewUser(any(CreateNewUserDTO.class))).willReturn(user);
 		

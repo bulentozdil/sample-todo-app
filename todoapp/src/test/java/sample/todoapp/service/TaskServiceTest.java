@@ -138,7 +138,7 @@ public class TaskServiceTest {
 	}
 
 	@Test
-	public void it_should_update_isdeleted_field_as_true() {
+	public void it_should_delete() {
 
 		// given
 		var task = new Task("ozdilbulent@gmail.com", "new task", "Hello my first task");
@@ -147,11 +147,11 @@ public class TaskServiceTest {
 		Mockito.when(taskRepository.findById(task.getId())).thenReturn(task);
 
 		// when
-		boolean retval = taskService.setTaskAsDeleted(task.getId());
+		boolean retval = taskService.delete(task.getId());
 
 		// then
 		assertTrue(retval);
-		Mockito.verify(taskRepository).update(task);
+		Mockito.verify(taskRepository).delete(task.getId());
 	}
 
 	// so on and ...

@@ -11,21 +11,9 @@ public class TaskDTO {
 
 	@JsonProperty
 	private boolean isCompleted;
-	@JsonProperty
-	private boolean isDeleted;
 	private long timespan;
-	
-	/**
-	 * @param id
-	 * @param userId
-	 * @param name
-	 * @param description
-	 */
-	public TaskDTO(
-			String id,
-			String userId,
-			String name,
-			String description) {
+
+	public TaskDTO(String id, String userId, String name, String description) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -33,121 +21,60 @@ public class TaskDTO {
 		this.description = description;
 	}
 
-	public TaskDTO(
-			String id,
-			String userId,
-			String name,
-			String description,
-			long timespan) {
+	public TaskDTO(String id, String userId, String name, String description, long timespan, boolean isCompleted) {
 		this.id = id;
 		this.userId = userId;
 		this.name = name;
 		this.description = description;
 		this.timespan = timespan;
+		this.isCompleted = isCompleted;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @return the userId
-	 */
 	public String getUserId() {
 		return userId;
 	}
 
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @return the description
-	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * @return the isCompleted
-	 */
 	public boolean isCompleted() {
 		return isCompleted;
 	}
 
-	/**
-	 * @return the isDeleted
-	 */
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-
-	/**
-	 * @return the timespan
-	 */
 	public long getTimespan() {
 		return timespan;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(
-			String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(
-			String userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(
-			String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(
-			String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/**
-	 * @param isCompleted the isCompleted to set
-	 */
-	public void setCompleted(
-			boolean isCompleted) {
+	public void setCompleted(boolean isCompleted) {
 		this.isCompleted = isCompleted;
 	}
 
-	/**
-	 * @param isDeleted the isDeleted to set
-	 */
-	public void setDeleted(
-			boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	/**
-	 * @param timespan the timespan to set
-	 */
-	public void setTimespan(
-			long timespan) {
+	public void setTimespan(long timespan) {
 		this.timespan = timespan;
 	}
 }

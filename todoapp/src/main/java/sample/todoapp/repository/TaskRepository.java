@@ -17,30 +17,22 @@ import sample.todoapp.exception.GlobalException;
 @Component
 public class TaskRepository extends Repository {
  
-	/**
-	 * @param entity
-	 * @return
-	 */
 	public Task save(
 			Task entity) {
 		bucket().defaultCollection().insert(entity.getId(), entity);
 		return entity;
 	}
  
-	/**
-	 * @param entity
-	 * @return
-	 */
 	public Task update(
 			Task entity) {
 		bucket().defaultCollection().upsert(entity.getId(), entity);
 		return entity;
 	}
+	
+	public void delete(String id) {
+		bucket().defaultCollection().remove(id);
+	}
  
-	/**
-	 * @param id
-	 * @return
-	 */
 	public Task findById(
 			String id) {
 		try {
@@ -55,10 +47,6 @@ public class TaskRepository extends Repository {
 		}
 	}
  
-	/**
-	 * @param userId
-	 * @return
-	 */
 	public List<Task> findAllByUserId(
 			String userId) {
 		return cluster().query("select * from task where userId = $userId", QueryOptions.queryOptions()
@@ -66,12 +54,7 @@ public class TaskRepository extends Repository {
 				.parameters(JsonObject.create().put("userId", userId)))
 				.rowsAs(Task.class);
 	}
- 
-	/**
-	 * @param id
-	 * @param userId
-	 * @return
-	 */
+
 	public Task findOneByIdAndUserId(
 			String id,
 			String userId) {

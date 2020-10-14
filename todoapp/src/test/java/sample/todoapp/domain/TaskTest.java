@@ -30,13 +30,4 @@ public class TaskTest {
 		
 		assertEquals(true, task.getIsCompleted());
 	}
-	
-	@Test
-	public void it_should_be_as_deleted() {
-		
-		Task task = new Task("1", "new task", "description");
-		task.setAsDeleted();
-		
-		assertEquals(true, task.getIsDeleted());
-	}
 }

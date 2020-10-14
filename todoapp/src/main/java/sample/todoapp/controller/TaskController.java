@@ -44,7 +44,6 @@ public class TaskController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> createTask(
-			@RequestParam String userId,
 			@RequestBody CreateTaskDTO dto) {
 		taskService.create(dto);
 		return ResponseEntity.ok(true);
@@ -67,10 +66,10 @@ public class TaskController {
 		return ResponseEntity.ok(retval);
 	}
 
-	@RequestMapping(value = "/{taskId}/deleted", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{taskId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Boolean> deleted(
 			@PathVariable String taskId) {
-		boolean retval = taskService.setTaskAsDeleted(taskId);
+		boolean retval = taskService.delete(taskId);
 		return ResponseEntity.ok(retval);
 	}
 }

@@ -17,6 +17,7 @@ public class TaskDTOConverter implements Function<Task, TaskDTO> {
 				t.getUserId(), 
 				t.getName(), 
 				t.getDescription(), 
-				t.getTimespan());
+				t.getTimespan(),
+				t.getIsCompleted());
 	}
 }

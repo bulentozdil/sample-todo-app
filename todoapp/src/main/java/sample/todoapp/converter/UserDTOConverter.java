@@ -11,8 +11,7 @@ import sample.todoapp.dto.UserDTO;
 public class UserDTOConverter implements Function<User, UserDTO> {
 
 	@Override
-	public UserDTO apply(
-			User t) {
-		return new UserDTO(t.getFullname(),t.getEmail());
+	public UserDTO apply(User t) {
+		return new UserDTO(t.getId(), t.getFullname(), t.getEmail());
 	}
 }

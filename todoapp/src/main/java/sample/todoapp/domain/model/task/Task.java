@@ -22,24 +22,13 @@ public class Task {
 	private String description;
 	@Field 
 	private boolean isCompleted;
-	@Field 
-	private boolean isDeleted;
 	@Field
 	private long timespan;
 	
-	/**
-	 * 
-	 */
 	public Task() {
 	
 	}
 
-	/**
-	 * @param realmId
-	 * @param name
-	 * @param description
-	 * @param planDate
-	 */
 	public Task(
 			String userId,
 			String name,
@@ -50,24 +39,16 @@ public class Task {
 
 		// Default fields
 		this.isCompleted = false;
-		this.isCompleted = false;
 		
 		this.timespan = new Date().getTime();
 		
 		this.id = UUID.randomUUID().toString();
 	}
 	
-	/**
-	 * @param id
-	 */
 	public void setId(String id) {
 		this.id=id;
 	}
 
-	/**
-	 * @param name
-	 * @param description
-	 */
 	public void applyChanges(
 			String name,
 			String description) {
@@ -75,65 +56,31 @@ public class Task {
 		this.description = description;
 	}
 
-	/**
-	 * 
-	 */
 	public void setAsCompleted() {
 		this.isCompleted = true;
 	}
 
-	/**
-	 * 
-	 */
-	public void setAsDeleted() {
-		this.isDeleted = true;
-	}
-
-	/**
-	 * @return the id
-	 */
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @return the userId
-	 */
+
 	public String getUserId() {
 		return userId;
 	}
 
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @return the description
-	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * @return the isCompleted
-	 */
 	public boolean getIsCompleted() {
 		return isCompleted;
 	}
-
-	/**
-	 * @return the isDeleted
-	 */
-	public boolean getIsDeleted() {
-		return isDeleted;
-	}
 	
-	/**
-	 * @return the timespan
-	 */
 	public long getTimespan() {
 		return timespan;
 	}

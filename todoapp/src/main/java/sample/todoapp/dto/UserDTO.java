@@ -4,45 +4,37 @@ import org.springframework.core.style.ToStringCreator;
 
 public class UserDTO {
 
+	private String id;
 	private String fullname;
 	private String email;
 
-	/**
-	 * @param fullname
-	 * @param email
-	 */
 	public UserDTO(
+			String id,
 			String fullname,
 			String email) {
+		this.id=id;
 		this.fullname = fullname;
 		this.email = email;
 	}
+	
+	public String getId() {
+		return id;
+	}
 
-	/**
-	 * @return the fullname
-	 */
+
 	public String getFullname() {
 		return fullname;
 	}
 
-	/**
-	 * @return the email
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @param fullname the fullname to set
-	 */
 	public void setFullname(
 			String fullname) {
 		this.fullname = fullname;
 	}
 
-	/**
-	 * @param email the email to set
-	 */
 	public void setEmail(
 			String email) {
 		this.email = email;
