@@ -27,8 +27,8 @@ public class TaskService {
 		return taskRepository.findAllByUserId(userId);
 	}
 
-	public Task getOne(String taskId, String userId) {
-		return taskRepository.findOneByIdAndUserId(taskId, userId);
+	public Task getOne(String taskId) {
+		return taskRepository.findById(taskId);
 	}
 
 	public Task create(CreateTaskDTO dto) {

@@ -187,7 +187,7 @@ public class TaskControllerTest {
 		Task task = new Task("ozdilbulent@gmail.com", "new task", "Hello my first task");
 		task.setId("123");
 		
-		given(taskService.getOne("123", "ozdilbulent@gmail.com")).willReturn(task);
+		given(taskService.getOne("123")).willReturn(task);
 		
 		TaskDTO dto = new TaskDTO("123", "ozdilbulent@gmail.com", "new task", "Hello my first task", 12314234,false);
 		

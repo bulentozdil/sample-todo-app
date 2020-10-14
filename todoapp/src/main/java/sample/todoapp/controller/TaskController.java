@@ -36,9 +36,8 @@ public class TaskController {
 
 	@RequestMapping(value = "/{taskId}", method = RequestMethod.GET)
 	public ResponseEntity<TaskDTO> getOne(
-			@PathVariable String taskId,
-			@RequestParam String userId) {
-		var data = taskService.getOne(taskId, userId);
+			@PathVariable String taskId) {
+		var data = taskService.getOne(taskId);
 		return ResponseEntity.ok(taskConverter.apply(data));
 	}
 

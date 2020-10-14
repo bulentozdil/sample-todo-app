@@ -36,18 +36,17 @@ public class TaskServiceTest {
 
 		// given
 		String taskId = "123xyz";
-		String userId = "1";
 
 		var task = new Task("ozdilbulent1@gmail.com", "new task 1", "Hello my first task 1");
 
-		Mockito.when(taskRepository.findOneByIdAndUserId(taskId, userId)).thenReturn(task);
+		Mockito.when(taskRepository.findById(taskId)).thenReturn(task);
 
 		// when
-		var getOne = taskService.getOne(taskId, userId);
+		var getOne = taskService.getOne(taskId);
 
 		// then
 		assertEquals(getOne, task);
-		Mockito.verify(taskRepository).findOneByIdAndUserId(taskId, userId);
+		Mockito.verify(taskRepository).findById(taskId);
 	}
 
 	@Test
