@@ -116,7 +116,7 @@ public class TaskServiceTest {
 
 		// then
 		assertEquals(editTask, task);
-		Mockito.verify(taskRepository).save(task);
+		Mockito.verify(taskRepository).update(task);
 	}
 
 	@Test

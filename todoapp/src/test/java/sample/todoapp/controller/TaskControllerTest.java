@@ -63,7 +63,7 @@ public class TaskControllerTest {
 		
 		//when
         var result = mockMvc.perform(
-        		delete("/tasks/"+taskId+"/deleted")
+        		delete("/tasks/"+taskId)
         			.accept(MediaType.APPLICATION_JSON) 
         			.contentType(MediaType.APPLICATION_JSON_VALUE)
         			.characterEncoding("UTF-8"))
@@ -181,20 +181,21 @@ public class TaskControllerTest {
 	}
 
 	@Test
-	public void it_should_get_by_id_and_userid() throws Exception {
+	public void it_should_get_one_by_id() throws Exception {
 
 		// given
+		String taskId="123";
 		Task task = new Task("ozdilbulent@gmail.com", "new task", "Hello my first task");
-		task.setId("123");
+		task.setId(taskId);
 		
-		given(taskService.getOne("123")).willReturn(task);
+		given(taskService.getOne(taskId)).willReturn(task);
 		
-		TaskDTO dto = new TaskDTO("123", "ozdilbulent@gmail.com", "new task", "Hello my first task", 12314234,false);
+		TaskDTO dto = new TaskDTO(taskId, "ozdilbulent@gmail.com", "new task", "Hello my first task", 12314234,false);
 		
 		given(taskConverter.apply(task)).willReturn(dto);
 		
 		 //when
-        mockMvc.perform(get("/tasks/123?userId="+"ozdilbulent@gmail.com"))
+        mockMvc.perform(get(String.format("/tasks/%s",taskId)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value("123"))
                 .andExpect(jsonPath("$.name").value("new task"))
