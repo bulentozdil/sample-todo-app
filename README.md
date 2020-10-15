@@ -44,8 +44,11 @@ mvn clean install -DskipTests=true
 
 # How To Run
 ```git
-java - jar todoapp-1.0.0.0.jar
+java - jar target/todoapp-1.0.0.0.jar
 ```
+
+# Swagger
+Url - [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 # Docker compose
 
